@@ -1,0 +1,63 @@
+$font-stack: "Muli", sans-serif;
+$base-font-size: 16px;
+
+$hf-background: #222;
+$hf-font-color: #fff;
+$hf-box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.75);
+
+$header-height: 70px;
+$footer-height: 40px;
+
+$header-logo-height: $header-height - 10;
+
+body{
+	font-family: $font-stack;
+	font-size: $base-font-size;
+}
+
+#header{
+	background: $hf-background;
+	color: $hf-font-color;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	height: $header-height;
+	line-height: $header-height;
+	/*box-shadow: $hf-box-shadow*/
+	
+	#appTitle{
+		font-size:2rem;
+	}
+	
+	#logo{
+		margin-right:10px;
+		img{
+			max-height:$header-logo-height;
+			margin-top: ($header-height - $header-logo-height) / 2;
+			width:auto;
+			display:block;
+		}
+	}
+}
+
+#footer{
+	background: $hf-background;
+	color: $hf-font-color;
+	position:absolute;
+	z-index:1;
+	bottom:0;
+	left:0;
+	height: $footer-height;
+	/*box-shadow: $hf-box-shadow*/
+}
+
+#map{
+	width: 100%;
+	z-index: 0;
+	background: #fff;
+	position: absolute;
+	overflow: hidden;
+	top: $header-height;
+	bottom: $footer-height;
+}

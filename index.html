@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  	<title>Simple Template</title>
+  	<meta name="description" content="Simple Template">
+  	<!-- Bootstrap CSS -->
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  	<!-- Google Fonts -->
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Muli:300,400">
+	<!-- esri -->
+	<link rel="stylesheet" href="https://js.arcgis.com/3.15/esri/css/esri.css">
+	<!-- App Related CSS -->
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12 clearfix" id="header">
+			<div class="pull-left" id="logo"></div>
+			<div class="pull-left" id="appTitle"></div>
+			<div class="pull-right"><span role="widget-container" id="dgLayerList"></span></div>
+		</div>
+		<div class="col-md-12 col-sm-12 col-xs-12" id="footer"></div>
+	</div>
+</div>
+
+<div id="map"></div>
+
+<script>
+	var dojoConfig = (function(){
+		var base = location.href.split("/");
+		base.pop();
+		base = base.join("/");
+		return{
+			async:true,
+			isDebug:true,
+			packages:[
+				"app",
+				"config",
+				"dg"
+			],
+			paths:{
+				app: 	base + "/js/app",
+				config: base + "/config",
+				dg:		base + "/js/dg"
+			},
+			map: []
+			
+		};
+	})();
+</script>
+
+<script src="https://js.arcgis.com/3.15/"></script>
+
+<script>
+	require(["app/Controller"],function(Controller){		
+		Controller.startup();
+	});
+</script>
+
+
+</body>
+</html>

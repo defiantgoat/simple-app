@@ -1,0 +1,12 @@
+{
+	"layerName": {
+		"url": null,
+		"id": "layer_one",
+		"title": "Layer One"
+	},
+	"layerName2": {
+		"url": null,
+		"id": "layer_two",
+		"title": "Layer Two"
+	}
+}

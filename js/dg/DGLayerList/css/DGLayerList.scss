@@ -1,0 +1,26 @@
+$background-color: darkblue;
+$icon-color: #fff;
+
+.dg-layer-list{
+
+	.toggle-button{
+		background: $background-color;
+		color:$icon-color;
+		display: block;
+		width: 70px;
+		border: 0;
+    	padding: 0 10px;
+		position: absolute;
+		top: 0;
+		right: 0;
+		z-index: 300;
+		font-size:1.5em;	
+	}
+	 
+	.dg-off{
+		display:none !important;
+	}
+	.dg-on{
+		display:block !important;
+	}
+}

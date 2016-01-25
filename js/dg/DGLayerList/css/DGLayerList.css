@@ -1,0 +1,18 @@
+.dg-layer-list .toggle-button {
+  background: darkblue;
+  color: #fff;
+  display: block;
+  width: 70px;
+  border: 0;
+  padding: 0 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 300;
+  font-size: 1.5em; }
+.dg-layer-list .dg-off {
+  display: none !important; }
+.dg-layer-list .dg-on {
+  display: block !important; }
+
+/*# sourceMappingURL=DGLayerList.css.map */
