@@ -1,7 +1,10 @@
-$background-color: darkblue;
+$background-color: #111;
 $icon-color: #fff;
+$text-color: #333;
 
 .dg-layer-list{
+
+	color: $text-color;
 
 	.toggle-button{
 		background: $background-color;
@@ -15,6 +18,24 @@ $icon-color: #fff;
 		right: 0;
 		z-index: 300;
 		font-size:1.5em;	
+	}
+	
+	.dg-layer-list-container{
+		/*border-width:0 0 5px 5px;
+		border-style:solid;
+		border-color:$background-color;*/
+		background:#fff;
+		position:absolute;
+		right:0; 
+		width:300px; 
+		height:300px;
+		overflow:hidden;
+		overflow-y:scroll;
+		line-height:1em;
+		-moz-transition: height .3s;
+		-webkit-transition: height .3s;
+		-o-transition: height .3s;
+		transition: height .3s;			
 	}
 	 
 	.dg-off{

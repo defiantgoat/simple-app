@@ -1,18 +1,18 @@
-define([],function(){
-	
-	return{		
+define([],function(){return{		
 		
-		/* Edit Below */
+		/* Edit Below 
+		----------------------------------------------------------------------------------------------------*/
 		
 		"application" : {
 			"title": "Sample App",
-			"logo": "images/logo.png"
+			"logo": "images/logo.png",
+			"header_footer_background_color": "#555"
 		},
 		
 		"widgets" : {
-			"geolocate" : false,
-			"scalebar" : false,
-			"DGLayerList" : true
+			"geolocate": false,
+			"scalebar": false,
+			"DGLayerList": true
 		},
 		
 		// map options as of api v3.15
@@ -28,7 +28,7 @@ define([],function(){
 			force3DTransforms: false,
 			//infoWindow: null,
 			//lods: null,
-			logo: false,
+			logo: true,
 			//maxScale: null,
 			//maxZoom: null,
 			//minScale: null,
@@ -52,7 +52,7 @@ define([],function(){
 		}
 			
 			
-		/* Edit Above */
+		/* ----------------------------------------------------------------------------------------------------
+		Edit Above */
 			
-	}// end return statement	
-});//end define
+}});
