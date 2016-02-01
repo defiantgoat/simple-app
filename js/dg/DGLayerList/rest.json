@@ -1,12 +1,12 @@
 {
-	"layerName": {
-		"url": null,
-		"id": "layer_one",
-		"title": "Layer One"
+	"waterAbandonedPoints": {
+		"url": "https://sampleserver6.arcgisonline.com/arcgis/rest/services/Water_Network/FeatureServer/2",
+		"id": "water_abandoned_points",
+		"title": "Water: Abandoned Points"
 	},
-	"layerName2": {
-		"url": null,
-		"id": "layer_two",
-		"title": "Layer Two"
+	"wildfireRespPoints": {
+		"url": "https://sampleserver6.arcgisonline.com/arcgis/rest/services/Wildfire/FeatureServer/0",
+		"id": "wildfire_response_points",
+		"title": "Wildfire:Resp"
 	}
 }

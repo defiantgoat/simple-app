@@ -7,11 +7,13 @@ define([
         ,"dojo/dom-geometry"
         ,"dojo/dom-style"
         ,"dojo/on"
+		,"dojo/promise/all"
         ,"dojo/window"
         ,"dojo/request/xhr"
         ,"dijit/_WidgetBase"
         ,"dijit/_TemplatedMixin"
         ,"dojo/text!./template/DGLayerList.html"
+		,"esri/request"
         ],
         function(
     		declare
@@ -22,11 +24,13 @@ define([
     		,domGeom
     		,domStyle
     		,on
+			,all
     		,win
     		,xhr
     		,_WidgetBase
     		,_TemplatedMixin
     		,template
+			,esriRequest
     		){
 	
 	var configError;
@@ -58,29 +62,63 @@ define([
 		rest: null,
 		
 		startup: function(){
-			
+		
+		},
+		
+		postCreate: function () {
 			this.setEventHandlers();
-			this.setUIPositions();
-			
-			if(configError !== true){
-				xhr(config.paths.dg+"/DGLayerList/rest.json",{
-					handleAs: "json"
-				}).then(
-					lang.hitch(this,function(data){
-						this.rest = data;
-						for(layer in this.rest){
-							console.log(this.rest[layer]);
+				this.setUIPositions();
+				
+				if(configError !== true){
+					xhr(config.paths.dg+"/DGLayerList/rest.json",{
+						handleAs: "json"
+					}).then(
+						lang.hitch(this,function(data){
+							this.rest = data;
+							this.getServicesInfo();
+		
+						}),
+						function(err){
+							console.error(err);
 						}
-	
-					}),
-					function(err){
-						console.error(err);
-					}
-				);
-					
-			}else{
-				this.dgLayerListToggleButton.innerHTML = "Error";
-			}
+					);
+						
+				}else{
+					this.dgLayerListToggleButton.innerHTML = "Error";
+				}
+		
+		
+		
+		
+		},
+		
+		getServicesInfo: function(){
+			
+			var services = []; // array to hold all the esriRequest objects
+			
+			// for all layers in config file create an esriRequest and push it to the serviceRequests array
+		    for(var service in this.rest){
+		    	services.push(esriRequest({
+		    			url: this.rest[service].url + "?f=pjson",
+		    			handleAs: "json",
+		    			callbackParamName: "callback"
+		    	}));
+		    }
+		    
+		    /*
+		     * esriRequests are Deferred objects, using dojo's all method
+		     * allows the application to process all the Deferreds and then
+		     * to do something with all the data once they all return data.
+		     * all returns all the Deferred objects in the same order they were called
+		     */
+		    all(services).then(lang.hitch(this, function (results) {
+		        this.addToUI(results);
+		    }));
+		},
+		
+		addToUI: function(res){
+			console.log(res);
+		
 		},
 		
 		setEventHandlers: function(){
