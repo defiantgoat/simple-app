@@ -20,7 +20,7 @@ define([],function(){return{
 			//attributionWidth: null,
 			autoResize: true,
 			basemap: "gray",
-			center: [-78.6389, 35.7806], //[lat,long]
+			center: [-98, 39.5], //[lat,long]
 			displayGraphicsOnPan: true,
 			//extent: null,
 			//fadeOnZoom: false,
@@ -39,7 +39,7 @@ define([],function(){return{
 			resizeDisplay: 300,
 			//scale: null,
 			showAttribution: false,
-			showInfoWindowOnClick: false,
+			showInfoWindowOnClick: true,
 			showLabels: false,
 			slider: true,
 			//sliderLabels: null,
@@ -48,7 +48,7 @@ define([],function(){return{
 			sliderStyle: "small",
 			//smartNavigation: true,
 			wrapAround180: true,
-			zoom: 10	
+			zoom: 5	
 		}
 			
 			

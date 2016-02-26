@@ -14,6 +14,7 @@ define([
         ,"dijit/_TemplatedMixin"
         ,"dojo/text!./template/DGLayerList.html"
 		,"esri/request"
+		,"dg/DGLayerList/DGLayerItem"
         ],
         function(
     		declare
@@ -31,6 +32,7 @@ define([
     		,_TemplatedMixin
     		,template
 			,esriRequest
+			,DGLayerItem
     		){
 	
 	var configError;
@@ -67,42 +69,38 @@ define([
 		
 		postCreate: function () {
 			this.setEventHandlers();
-				this.setUIPositions();
-				
-				if(configError !== true){
-					xhr(config.paths.dg+"/DGLayerList/rest.json",{
-						handleAs: "json"
-					}).then(
-						lang.hitch(this,function(data){
-							this.rest = data;
-							this.getServicesInfo();
-		
-						}),
-						function(err){
-							console.error(err);
-						}
-					);
-						
-				}else{
-					this.dgLayerListToggleButton.innerHTML = "Error";
-				}
-		
-		
-		
-		
+			this.setUIPositions();
+			
+			if(configError !== true){
+				xhr(config.paths.dg+"/DGLayerList/rest.json",{
+					handleAs: "json"
+				}).then(
+					lang.hitch(this,function(data){
+						this.rest = data;
+						this.getServicesInfo();
+	
+					}),
+					function(err){
+						console.error(err);
+					}
+				);
+					
+			}else{
+				this.dgLayerListToggleButton.innerHTML = "Error";
+			}
+	
 		},
 		
 		getServicesInfo: function(){
 			
 			var services = []; // array to hold all the esriRequest objects
-			
-			// for all layers in config file create an esriRequest and push it to the serviceRequests array
-		    for(var service in this.rest){
+				    
+		    for(var x=0; x < this.rest.length; x++){
 		    	services.push(esriRequest({
-		    			url: this.rest[service].url + "?f=pjson",
-		    			handleAs: "json",
-		    			callbackParamName: "callback"
-		    	}));
+	    			url: this.rest[x].url + "?f=pjson",
+	    			handleAs: "json",
+	    			callbackParamName: "callback"
+		    	}));    	
 		    }
 		    
 		    /*
@@ -112,12 +110,29 @@ define([
 		     * all returns all the Deferred objects in the same order they were called
 		     */
 		    all(services).then(lang.hitch(this, function (results) {
-		        this.addToUI(results);
+		    	if(results.length > 0){
+		    		this.dgLayerList.innerHTML = "";
+		    		this.addToUI(results);
+		    	}else{
+		    		this.dgLayerList.innerHTML = "No Layer Data.";
+		    	}
 		    }));
 		},
 		
 		addToUI: function(res){
-			console.log(res);
+			for(var x=0; x < res.length; x++){
+				res[x].layerConfig = this.rest[x];
+				
+				var listItem = new DGLayerItem({
+					"map" : this.map,
+					"layer": res[x]
+				});
+				listItem.placeAt(this.dgLayerList);
+				console.log(listItem);
+				
+				listItem.startup();
+				//this.dgLayerList.innerHTML += "<br>"+this.rest[x].title;
+			}
 		
 		},
 		
@@ -132,7 +147,8 @@ define([
                 }
                 this.tOut = setTimeout(lang.hitch(this, function() {
                 	this.setUIPositions();
-                	this.setMapWidth();
+                	//this.setMapWidth("window");
+                	this.setMapWidth({"caller": "window", "type": "resizing"});
                 }), 300);
             }));  
 			
@@ -158,11 +174,20 @@ define([
 			domStyle.set(this.dgLayerList, "height", height);
 		},
 		
-		setMapWidth: function(){
+		setMapWidth: function(event){
 			if(dom.byId("map")){
-				var width = win.getBox().w - domGeom.getMarginBox(this.dgLayerList).w + "px";
-				domStyle.set(dom.byId("map"),"width",width);
-				this.map.resize(true);
+				console.log(event);
+				if(!domClass.contains(this.dgLayerList,"dg-off")){
+					var width = win.getBox().w - domGeom.getMarginBox(this.dgLayerList).w + "px";
+					domStyle.set(dom.byId("map"),"width",width);
+					this.map.resize(true);
+				}else{
+					
+					if(event.caller != "window"){
+						domStyle.set(dom.byId("map"),"width","");
+						this.map.resize(true);
+					}
+				}
 			}
 		},
 		
@@ -172,10 +197,12 @@ define([
 			case "toggle-layer-list":
 				if(domClass.contains(this.dgLayerList,"dg-off")){
 					domClass.remove(this.dgLayerList, "dg-off");
+					this.setMapWidth({"caller": "layer-list", "type": "opening"});
 				}else{
-					domClass.add(this.dgLayerList, "dg-off");				
+					domClass.add(this.dgLayerList, "dg-off");
+					this.setMapWidth({"caller": "layer-list", "type": "closing"});
 				}
-				this.setMapWidth();
+				//this.setMapWidth();
 				break;
 				
 			default:

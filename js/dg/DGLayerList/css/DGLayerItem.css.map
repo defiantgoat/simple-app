@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAKA,cAAc;EACb,SAAS,EAAC,eAAe;EACzB,MAAM,EAAC,YAAY;EACnB,OAAO,EAAE,QAAQ;EAEjB,gHAAiB;IAChB,OAAO,EAAC,CAAC;IACT,MAAM,EAAC,CAAC;EAET,iBAAE;IACD,SAAS,EAAC,GAAG;IACb,aAAa,EAAC,IAAI",
+"sources": ["_DGLayerItem.scss"],
+"names": [],
+"file": "DGLayerItem.css"
+}

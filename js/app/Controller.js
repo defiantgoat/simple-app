@@ -66,6 +66,7 @@ define([
 				if(config.widgets.hasOwnProperty("DGLayerList")){
 					if(config.widgets.DGLayerList == true){
 						require(["dg/DGLayerList/DGLayerList"],lang.hitch(this,function(DGLayerList){
+							console.log(this);
 							this.dgLayerList = new DGLayerList({
 								map:this.map
 							},"dgLayerList");
