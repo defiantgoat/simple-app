@@ -1,0 +1,49 @@
+body {
+  font-family: "Muli", sans-serif;
+  font-size: 16px;
+  overflow: hidden; }
+
+#header {
+  background: #222;
+  color: #fff;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 70px;
+  line-height: 70px;
+  /*box-shadow: $hf-box-shadow*/ }
+  #header #appTitle {
+    font-size: 2rem; }
+  #header #logo {
+    margin-right: 10px; }
+    #header #logo img {
+      max-height: 60px;
+      margin-top: 5px;
+      width: auto;
+      display: block; }
+
+#footer {
+  background: #222;
+  color: #fff;
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+  /*box-shadow: $hf-box-shadow*/ }
+
+#map {
+  width: 100%;
+  z-index: 0;
+  background: #fff;
+  position: absolute;
+  overflow: hidden;
+  top: 70px;
+  bottom: 40px;
+  -moz-transition: width .3s;
+  -webkit-transition: width .3s;
+  -o-transition: width .3s;
+  transition: width .3s; }
+
+/*# sourceMappingURL=style.css.map */

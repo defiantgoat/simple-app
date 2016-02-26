@@ -1,0 +1,36 @@
+.dg-layer-list {
+  color: #333; }
+  .dg-layer-list .toggle-button {
+    background: #333;
+    color: #fff;
+    display: block;
+    width: 70px;
+    border: 0;
+    padding: 0 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 300;
+    font-size: 1.5em; }
+  .dg-layer-list .dg-layer-list-container {
+    border-width: 0 0 0 5px;
+    border-style: solid;
+    border-color: #555;
+    background: #fff;
+    position: absolute;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    overflow-y: scroll;
+    line-height: 1em;
+    -moz-transition: height .3s;
+    -webkit-transition: height .3s;
+    -o-transition: height .3s;
+    transition: height .3s; }
+  .dg-layer-list .dg-off {
+    display: none !important; }
+  .dg-layer-list .dg-on {
+    display: block !important; }
+
+/*# sourceMappingURL=DGLayerList.css.map */
